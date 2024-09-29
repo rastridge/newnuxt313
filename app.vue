@@ -37,6 +37,3 @@
 <style lang="scss">
   @use '~/assets/css/layout';
 </style>
-<!-- <style>
-  @use '~/assets/css/layout';
-</style> -->
