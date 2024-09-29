@@ -17,7 +17,7 @@
     title: 'The Buffalo Rugby Club',
     // url: 'https://experimental--buffalorugbyorg.netlify.app/archives/news/html/1067',
 
-    ogTitle: 'The Buffalo Rugby Cluby',
+    ogTitle: 'The Buffalo Rugby Club',
     description: 'News',
     ogDescription: 'News',
     // ogUrl:

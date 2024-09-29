@@ -20,7 +20,7 @@
       <span
         style="font-family: 'Arial Black'"
         class="text-4xl md:text-7xl lg:text-7xl xl:text-8xl uppercase"
-        >Rugb</span
+        >Rugby</span
       >
     </div>
   </div>
