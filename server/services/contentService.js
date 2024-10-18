@@ -4,17 +4,17 @@
 const { doDBQueryDatestring } = useQuery()
 
 export const contentService = {
-	getAll,
-	getCustomMenuItems,
-	getOne,
-	editOne,
-	addOne,
-	deleteOne,
-	changeStatus,
+  getAll,
+  getCustomMenuItems,
+  getOne,
+  editOne,
+  addOne,
+  deleteOne,
+  changeStatus,
 }
 
 async function getAll() {
-	const sql = `SELECT
+  const sql = `SELECT
 					content_id,
 					content_id as id,
 					content_name,
@@ -37,12 +37,12 @@ async function getAll() {
 			ORDER BY
 				dt DESC`
 
-	const content = await doDBQueryDatestring(sql)
-	return content
+  const content = await doDBQueryDatestring(sql)
+  return content
 }
 
 async function getCustomMenuItems() {
-	const sql = `SELECT
+  const sql = `SELECT
 									content_id,
 									content_name
 							FROM
@@ -59,12 +59,12 @@ async function getCustomMenuItems() {
                   DATEDIFF( CURDATE(), content_expire_dt)  <=  0
 							ORDER BY
 									content_order ASC`
-	const content = await doDBQueryDatestring(sql)
-	return content
+  const content = await doDBQueryDatestring(sql)
+  return content
 }
 
 async function getOne(id) {
-	const sql = `SELECT
+  const sql = `SELECT
                     content_id,
                     content_id as id,
                     content_name,
@@ -83,12 +83,12 @@ async function getOne(id) {
                     AND
                     content_id = ${id}`
 
-	const content = await doDBQueryDatestring(sql)
-	return content[0]
+  const content = await doDBQueryDatestring(sql)
+  return content[0]
 }
 
 async function editOne(item) {
-	let sql = `UPDATE inbrc_content
+  let sql = `UPDATE inbrc_content
 							SET
 								content_name = ?,
 								content_body = ?,
@@ -98,21 +98,21 @@ async function editOne(item) {
 								modified_dt= NOW()
 							WHERE content_id = ?`
 
-	let inserts = []
-	inserts.push(
-		item.content_name,
-		item.content_body,
-		item.content_order,
-		item.content_release_dt,
-		item.content_expire_dt,
-		item.id
-	)
-	const content = await doDBQueryDatestring(sql, inserts)
-	return content
+  let inserts = []
+  inserts.push(
+    item.content_name,
+    item.content_body,
+    item.content_order,
+    item.content_release_dt,
+    item.content_expire_dt,
+    item.id,
+  )
+  const content = await doDBQueryDatestring(sql, inserts)
+  return content
 }
 
 async function addOne(item) {
-	let sql = `INSERT INTO inbrc_content
+  let sql = `INSERT INTO inbrc_content
 								SET
 								content_name = ?,
 								content_body = ?,
@@ -124,33 +124,33 @@ async function addOne(item) {
 								created_dt = NOW(),
 								modified_dt = NOW()`
 
-	let inserts = []
-	inserts.push(
-		item.content_name,
-		item.content_body,
-		item.content_order,
-		item.content_release_dt,
-		item.content_expire_dt
-	)
+  let inserts = []
+  inserts.push(
+    item.content_name,
+    item.content_body,
+    item.content_order,
+    item.content_release_dt,
+    item.content_expire_dt,
+  )
 
-	const content = await doDBQueryDatestring(sql, inserts)
-	return content
+  const content = await doDBQueryDatestring(sql, inserts)
+  return content
 }
 
 async function deleteOne(id) {
-	const sql =
-		`UPDATE inbrc_content SET deleted = 1, deleted_dt= NOW() WHERE content_id = ` +
-		id
-	const content = await doDBQueryDatestring(sql)
-	return content
+  const sql =
+    `UPDATE inbrc_content SET deleted = 1, deleted_dt= NOW() WHERE content_id = ` +
+    id
+  const content = await doDBQueryDatestring(sql)
+  return content
 }
 
 async function changeStatus({ id, status }) {
-	const sql =
-		`UPDATE inbrc_content SET status = "` +
-		status +
-		`" WHERE content_id = ` +
-		id
-	const content = await doDBQueryDatestring(sql)
-	return content
+  const sql =
+    `UPDATE inbrc_content SET status = "` +
+    status +
+    `" WHERE content_id = ` +
+    id
+  const content = await doDBQueryDatestring(sql)
+  return content
 }
